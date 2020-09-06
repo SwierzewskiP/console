@@ -11,13 +11,13 @@ public class TablePrinter<T> {
     private List<T> data;
     private List<ColumnPrinter> columns = new ArrayList<>();
 
-    public TablePrinter withData(List<T> list) {
+    public TablePrinter<T> withData(List<T> list) {
         // only first MAX_TABLE_SIZE rows are printed
         data = list.subList(0, Math.min(list.size(), MAX_TABLE_SIZE));
         return this;
     }
 
-    public TablePrinter withColumn(String headerName, Function<T, String> getValueFunction) {
+    public TablePrinter<T> withColumn(String headerName, Function<T, String> getValueFunction) {
         columns.add(new ColumnPrinter(headerName, getValueFunction));
         return this;
     }

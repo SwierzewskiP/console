@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ConsoleManager {
 
-    private EmployeeManager employeeManager = new EmployeeManager();
+    private RunnerManager runnerManager = new RunnerManager();
 
     public void start() {
         char userChoice = ' ';
@@ -14,14 +14,13 @@ public class ConsoleManager {
             userChoice = readChar();
             executeAction(userChoice);
         }
-
     }
 
     private void printMenu() {
         clrscr();
         System.out.println("Menu:");
-        System.out.println("1 - Lista pracowników");
-        System.out.println("2 - Dodaj pracownika");
+        System.out.println("1 - Lista biegaczy");
+        System.out.println("2 - Dodaj biegacza");
         System.out.println();
         System.out.println("q - wyjście");
 
@@ -41,11 +40,11 @@ public class ConsoleManager {
     private void executeAction(char userChoice) {
         switch (userChoice) {
             case '1':
-                employeeManager.printList();
+                runnerManager.printList();
                 pressEnterKeyToContinue();
                 break;
             case '2':
-                employeeManager.addEmployee();
+                runnerManager.addRunner();
 
         }
     }
