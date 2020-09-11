@@ -4,34 +4,46 @@ import pl.sda.dao.RunnerDAO;
 import pl.sda.dto.Runner;
 import pl.sda.view.table.TablePrinter;
 
-import javax.persistence.EntityManager;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class RunnerManager {
 
     RunnerDAO runnerDAO = new RunnerDAO();
+    Scanner s = new Scanner(System.in);
 
     public void printList() {
         new TablePrinter<Runner>()
-                .withData(runnerDAO.read())
+                .withData(runnerDAO.readAll())
+                .withColumn("Id biegacza", runner -> String.valueOf(runner.getId()))
                 .withColumn("Imię", Runner::getFirstName)
                 .withColumn("Nazwisko", Runner::getLastName)
                 .withColumn("Najlepszy czas", Runner::getTenKmBestTimeAsString)
-                .withColumn("Aktualny czas", Runner::getCurrentRunTimeAsString)
-                .withColumn("Lista biegów", runner -> String.valueOf(runner.getListOfEvents()))
+//                .withColumn("Aktualny czas", Runner::getCurrentRunTimeAsString)
+//                .withColumn("Lista biegów", runner -> String.valueOf(runner.getListOfEvents()))
                 .printTable();
     }
 
     public void addRunner() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Podaj imię:");
-        String firstName = s.nextLine();
-        System.out.println("Podaj nazwisko:");
-        String lastName = s.nextLine();
-        System.out.println("Podaj najlepszy czas na 10 km");
+            System.out.println("Podaj imię:");
+            String firstName = s.nextLine();
+            System.out.println("Podaj nazwisko:");
+            String lastName = s.nextLine();
+            boolean isFormatCorrect = false;
+            LocalTime bestTime = null;
+            while(!isFormatCorrect) {
+                System.out.println("Podaj najlepszy czas na 10 km (poprawny format HH:MM:SS):");
+                String bestTimeString = s.nextLine();
+                try {
+                    bestTime = LocalTime.parse(bestTimeString);
+                    isFormatCorrect=true;
+                } catch (Exception e) {
+                    System.out.println("Czas został podany w złym formacie!");
+                }
+            }
+            Runner runner = new Runner(firstName, lastName, bestTime);
 
+            runnerDAO.create(runner);
+        }
 
     }
-
-
-}

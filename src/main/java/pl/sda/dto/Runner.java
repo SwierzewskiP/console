@@ -17,28 +17,21 @@ public class Runner {
     private String lastName;
     @Column(name = "ten_km_best_time")
     private LocalTime tenKmBestTime;
-    @Column(name = "current_best_time")
-    private LocalTime currentRunTime;
-    @Column(name = "list_of_events")
-    @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<RunningEvent> listOfEvents;
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "runner")
+    private List<Run> listOfRuns;
 
     public Runner() {
     }
 
-    public Runner(String firstName, String lastName, LocalTime tenKmBestTime, LocalTime currentRunTime) {
+    public Runner(String firstName, String lastName, LocalTime tenKmBestTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.tenKmBestTime = tenKmBestTime;
-        this.currentRunTime = currentRunTime;
+
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -69,35 +62,26 @@ public class Runner {
         this.tenKmBestTime = tenKmBestTime;
     }
 
-    public LocalTime getCurrentRunTime() {
-        return currentRunTime;
-    }
+//    public LocalTime getCurrentRunTime() {
+//        return currentRunTime;
+//    }
+//
+//    public void setCurrentRunTime(LocalTime currentRunTime) {
+//        this.currentRunTime = currentRunTime;
+//    }
+//
+//    public List<RunningEvent> getListOfEvents() {
+//        return listOfEvents;
+//    }
+//
+//    public void setListOfEvents(List<RunningEvent> listOfEvents) {
+//        this.listOfEvents = listOfEvents;
+//    }
 
-    public String getCurrentRunTimeAsString() {
-        return currentRunTime != null ? currentRunTime.toString() : "";
-    }
-
-    public void setCurrentRunTime(LocalTime currentRunTime) {
-        this.currentRunTime = currentRunTime;
-    }
-
-    public List<RunningEvent> getListOfEvents() {
-        return listOfEvents;
-    }
-
-    public void setListOfEvents(List<RunningEvent> listOfEvents) {
-        this.listOfEvents = listOfEvents;
-    }
 
     @Override
     public String toString() {
-        return "Runner{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", tenKmBestTime=" + tenKmBestTime +
-                ", currentRunTime=" + currentRunTime +
-                '}';
+        return firstName + " " + lastName;
     }
 
     @Override

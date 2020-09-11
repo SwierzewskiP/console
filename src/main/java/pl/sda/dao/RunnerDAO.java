@@ -4,6 +4,7 @@ import pl.sda.dto.Runner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.time.LocalTime;
 import java.util.List;
 
 public class RunnerDAO {
@@ -16,12 +17,28 @@ public class RunnerDAO {
         entityManager.getTransaction().commit();
     }
 
-    public List<Runner> read() {
+    public List<Runner> readAll() {
         entityManager.getTransaction().begin();
         TypedQuery<Runner> query = entityManager.createQuery(
                 "SELECT r FROM Runner r", Runner.class);
         List<Runner> runners = query.getResultList();
         entityManager.getTransaction().commit();
-    return runners;
+
+        return runners;
+    }
+
+    public Runner getRunnerById(Long runnerId) {
+        entityManager.getTransaction().begin();
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        entityManager.getTransaction().commit();
+
+        return runner;
+    }
+
+    public void updateBestTime(Long runnerId, LocalTime newBestTime) {
+        entityManager.getTransaction().begin();
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        runner.setTenKmBestTime(newBestTime);
+        entityManager.getTransaction().commit();
     }
 }

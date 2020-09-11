@@ -3,26 +3,30 @@ package pl.sda.dto;
 import javax.persistence.*;
 import java.util.List;
 @Entity
+@Table(name = "running_event")
 public class RunningEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String place;
     @Column(name = "distance_in_kms")
-    private int distanceInKms;
-    @Column(name = "list_of_events")
-    @ManyToMany(mappedBy = "listOfEvents")
-    private List<Runner> listOfRunners;
+    private Float distanceInKms;
+    @OneToMany(mappedBy = "runningEvent")
+    private List<Run> listOfRuns;
 
     public RunningEvent() {
     }
 
-    public RunningEvent(String name, String place, int distanceInKms) {
+    public RunningEvent(String name, String place, Float distanceInKms) {
         this.name = name;
         this.place = place;
         this.distanceInKms = distanceInKms;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -41,21 +45,25 @@ public class RunningEvent {
         this.place = place;
     }
 
-    public int getDistanceInKms() {
+    public Float getDistanceInKms() {
         return distanceInKms;
     }
 
-    public void setDistanceInKms(int distanceInKms) {
+    public String getDistanceInKmsAsString() {
+        return distanceInKms != 0 ? String.valueOf(distanceInKms) : "";
+    }
+
+    public void setDistanceInKms(Float distanceInKms) {
         this.distanceInKms = distanceInKms;
     }
 
-    public List<Runner> getListOfRunners() {
-        return listOfRunners;
-    }
-
-    public void setListOfRunners(List<Runner> listOfRunners) {
-        this.listOfRunners = listOfRunners;
-    }
+//    public List<Runner> getListOfRunners() {
+//        return listOfRunners;
+//    }
+//
+//    public void setListOfRunners(List<Runner> listOfRunners) {
+//        this.listOfRunners = listOfRunners;
+//    }
 
     @Override
     public String toString() {

@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 public class TablePrinter<T> {
 
-    private static final int MAX_COLUMN_SIZE = 15;
+    private static final int MAX_COLUMN_SIZE = 20;
     private static final int MAX_TABLE_SIZE = 100;
     private List<T> data;
     private List<ColumnPrinter> columns = new ArrayList<>();
