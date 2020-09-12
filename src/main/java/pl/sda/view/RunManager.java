@@ -22,13 +22,26 @@ public class RunManager {
         System.out.println("Podaj id biegacza:");
         Long runnerId = scanner.nextLong();
         Runner runner = runnerDAO.getRunnerById(runnerId);
+        System.out.println("Biegi, w których bierze udział " + runner + ":");
         new TablePrinter<Run>()
                 .withData(runDAO.readAllRunsOfSpecificRunner(runner))
-                .withColumn("Id biegacza", Run::getRunnerAsString)
-                .withColumn("Id eventu", Run::getRunningEventAsString)
+//                .withColumn("Dane biegacza", Run::getRunnerAsString)
+                .withColumn("Nazwa eventu", Run::getRunningEventAsString)
                 .withColumn("Osiągnięty czas", Run::getRunTimeAsString)
 //                .withColumn("Aktualny czas", Runner::getCurrentRunTimeAsString)
 //                .withColumn("Lista biegów", runner -> String.valueOf(runner.getListOfEvents()))
+                .printTable();
+    }
+
+    public void printAllRunnersOfAnEvent() {
+        System.out.println("Podaj id eventu:");
+        Long eventId = scanner.nextLong();
+        RunningEvent runningEvent = runningEventDAO.getEventById(eventId);
+        System.out.println("Lista uczestników biegu " + runningEvent + ":");
+        new TablePrinter<Run>()
+                .withData(runDAO.readAllRunnersOfSpecificEvent(runningEvent))
+                .withColumn("Dane biegacza", Run::getRunnerAsString)
+//                .withColumn("Osiągnięty czas", Run::getRunTimeAsString)
                 .printTable();
     }
 
@@ -55,4 +68,9 @@ public class RunManager {
 
         runDAO.create(run);
     }
+
+    public void updateRunTime () {
+
+    }
+
 }

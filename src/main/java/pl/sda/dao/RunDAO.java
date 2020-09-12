@@ -30,23 +30,16 @@ public class RunDAO {
         return runs;
     }
 
-//    public List<Run> readRunTimesOfARunner(Long runnerId) {
-//        entityManager.getTransaction().begin();
-//        TypedQuery<Run> query = entityManager.createQuery(
-//                "SELECT r FROM Run r WHERE r.runner_id" = r, Run.class);
-//        List<Run> runs = query.getResultList();
-//
-//        entityManager.getTransaction().commit();
-//        return runs;
-//    }
-//
-//    public void updateRunTime(int runnerId, LocalTime currentTime) {
-//        entityManager.getTransaction().begin();
-//        TypedQuery<Run> typedQuery = entityManager.createQuery(
-//                "SELECT r FROM Run r WHERE r.runner_id = :runnerId AND r.running_event_id = :eventId", Run.class);
-//        typedQuery.setParameter("id1", 1, "id2", 1);
-//        entityManager.getTransaction().commit();
-//    }
+    public List<Run> readAllRunnersOfSpecificEvent(RunningEvent runningEvent) {
+        entityManager.getTransaction().begin();
+        TypedQuery<Run> typedQuery = entityManager.createQuery(
+                "SELECT r FROM Run r WHERE r.runningEvent = :runningEvent", Run.class);
+        typedQuery.setParameter("runningEvent", runningEvent);
+        List<Run> runs = typedQuery.getResultList();
+        entityManager.getTransaction().commit();
+
+        return runs;
+    }
 
 
 }

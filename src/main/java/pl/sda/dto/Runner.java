@@ -81,7 +81,7 @@ public class Runner {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return lastName + " " + firstName;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package pl.sda.view;
 
-import pl.sda.dto.RunningEvent;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -31,7 +29,10 @@ public class ConsoleManager {
         System.out.println("5 - Zarejestruj czas biegu");
         System.out.println("6 - Wyświetl swoje biegi");
         System.out.println();
-        System.out.println("7 - Dodaj nowe wydarzenie biegowe");
+        System.out.println("7 - Wyświetl wszystkich uczestników danego biegu");
+        System.out.println("8 - Wyświetl wyniki danego biegu");
+        System.out.println();
+        System.out.println("9 - Dodaj nowe wydarzenie biegowe");
         System.out.println();
         System.out.println("q - wyjście");
 
@@ -72,6 +73,13 @@ public class ConsoleManager {
                 pressEnterKeyToContinue();
                 break;
             case '7':
+                runManager.printAllRunnersOfAnEvent();
+                pressEnterKeyToContinue();
+                break;
+            case '8':
+
+                break;
+            case '9':
                 runningEventManager.addRunningEvent();
         }
     }

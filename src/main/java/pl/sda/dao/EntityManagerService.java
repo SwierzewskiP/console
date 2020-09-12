@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Singleton of EntityManagerFactory.
+ */
+
 public class EntityManagerService {
 
     private static EntityManager entityManager;
