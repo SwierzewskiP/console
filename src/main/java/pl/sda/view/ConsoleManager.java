@@ -66,7 +66,7 @@ public class ConsoleManager {
                 runManager.addNewRun();
                 break;
             case '5':
-
+                runManager.updateRunTime();
                 break;
             case '6':
                 runManager.printAllRunsOfOneRunner();
@@ -77,7 +77,8 @@ public class ConsoleManager {
                 pressEnterKeyToContinue();
                 break;
             case '8':
-
+                runManager.printScoreboardOfAnEvent();
+                pressEnterKeyToContinue();
                 break;
             case '9':
                 runningEventManager.addRunningEvent();

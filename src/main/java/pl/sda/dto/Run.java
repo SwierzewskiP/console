@@ -7,6 +7,8 @@ import java.time.LocalTime;
 @Entity
 public class Run implements Serializable {
 
+    @Transient
+    private int placeOnScoreboard = 0;
     @Id
     @ManyToOne
     @JoinColumn(name = "runner_id")
@@ -48,28 +50,34 @@ public class Run implements Serializable {
         return runningEvent;
     }
 
-    public String getRunningEventAsString() {
-        return runningEvent != null ? runningEvent.toString() : "";
-    }
-
     public void setRunningEvent(RunningEvent runningEvent) {
         this.runningEvent = runningEvent;
+    }
+
+    public String getRunningEventAsString() {
+        return runningEvent != null ? runningEvent.toString() : "";
     }
 
     public LocalTime getRunTime() {
         return runTime;
     }
 
-    public String getRunTimeAsString() {
-        return runTime != null ? runTime.toString() : "";
-    }
-
     public void setRunTime(LocalTime runTime) {
         this.runTime = runTime;
     }
 
+    public String getRunTimeAsString() {
+        return runTime != null ? runTime.toString() : "";
+    }
+
+    public String incrementPlace() {
+        int nextPlaceOnScoreboard = placeOnScoreboard;
+        nextPlaceOnScoreboard++;
+        return nextPlaceOnScoreboard + "";
+    }
+
     @Override
     public String toString() {
-        return String.valueOf(runner) + runningEvent + runTime;
+        return "" + runner + runningEvent + runTime;
     }
 }

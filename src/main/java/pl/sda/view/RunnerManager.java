@@ -18,7 +18,7 @@ public class RunnerManager {
                 .withColumn("Id biegacza", runner -> String.valueOf(runner.getId()))
                 .withColumn("Imię", Runner::getFirstName)
                 .withColumn("Nazwisko", Runner::getLastName)
-                .withColumn("Najlepszy czas", Runner::getTenKmBestTimeAsString)
+                .withColumn("Czas na 10 km", Runner::getTenKmBestTimeAsString)
 //                .withColumn("Aktualny czas", Runner::getCurrentRunTimeAsString)
 //                .withColumn("Lista biegów", runner -> String.valueOf(runner.getListOfEvents()))
                 .printTable();

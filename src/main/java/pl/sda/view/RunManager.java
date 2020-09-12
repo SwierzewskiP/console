@@ -8,6 +8,7 @@ import pl.sda.dto.Runner;
 import pl.sda.dto.RunningEvent;
 import pl.sda.view.table.TablePrinter;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class RunManager {
@@ -45,6 +46,19 @@ public class RunManager {
                 .printTable();
     }
 
+    public void printScoreboardOfAnEvent() {
+        System.out.println("Podaj id eventu:");
+        Long eventId = scanner.nextLong();
+        RunningEvent runningEvent = runningEventDAO.getEventById(eventId);
+        System.out.println("Tablica wyników biegu " + runningEvent + ":");
+        new TablePrinter<Run>()
+                .withData(runDAO.readAllRunsOfSpecificEvent(runningEvent))
+                .withColumn("Miejsce", Run::incrementPlace)
+                .withColumn("Dane biegacza", Run::getRunnerAsString)
+                .withColumn("Osiągnięty czas", Run::getRunTimeAsString)
+                .printTable();
+    }
+
     public void addNewRun() {
         System.out.println("Podaj id biegacza:");
         Long runnerId = scanner.nextLong();
@@ -70,7 +84,28 @@ public class RunManager {
     }
 
     public void updateRunTime () {
+        System.out.println("Podaj id biegacza:");
+        Long runnerId = scanner.nextLong();
+        System.out.println("Podaj id biegu:");
+        Long eventId = scanner.nextLong();
+        scanner.nextLine();
+        boolean isFormatCorrect = false;
+        LocalTime runTime = null;
+        while(!isFormatCorrect) {
+            System.out.println("Podaj osiągnięty czas (poprawny format HH:MM:SS):");
+            String runTimeString = scanner.nextLine();
+            try {
+                runTime = LocalTime.parse(runTimeString);
+                isFormatCorrect = true;
+            } catch (Exception e) {
+                System.out.println("Czas został podany w złym formacie!");
+            }
+        }
 
+        Runner runner = runnerDAO.getRunnerById(runnerId);
+        RunningEvent runningEvent = runningEventDAO.getEventById(eventId);
+
+        runDAO.updateRunTime(runner, runningEvent, runTime);
     }
 
 }

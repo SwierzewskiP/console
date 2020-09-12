@@ -11,7 +11,7 @@
             <property name="javax.persistence.jdbc.password" value="EXECRUNNER" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="none" /> <!--Generowanie schematu DDL-->
-            <property name="hibernate.show_sql" value = "true" /> <!--Logowanie zapytań SQL-->
+            <property name="hibernate.show_sql" value = "false" /> <!--Logowanie zapytań SQL-->
         </properties>
     </persistence-unit>
 </persistence>
