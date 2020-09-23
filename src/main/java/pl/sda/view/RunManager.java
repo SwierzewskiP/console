@@ -9,6 +9,7 @@ import pl.sda.dto.RunningEvent;
 import pl.sda.view.table.TablePrinter;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class RunManager {
@@ -51,9 +52,15 @@ public class RunManager {
         Long eventId = scanner.nextLong();
         RunningEvent runningEvent = runningEventDAO.getEventById(eventId);
         System.out.println("Tablica wyników biegu " + runningEvent + ":");
+
+        List<Run> runs = runDAO.readAllRunsOfSpecificEvent(runningEvent);
+        for (int i = 0; i < runs.size(); i++) {
+            runs.get(i).setPlaceOnScoreboard(i + 1);
+
+        }
         new TablePrinter<Run>()
-                .withData(runDAO.readAllRunsOfSpecificEvent(runningEvent))
-                .withColumn("Miejsce", Run::incrementPlace)
+                .withData(runs)
+                .withColumn("Miejsce", Run::getPlaceOnScoreboardAsString)
                 .withColumn("Dane biegacza", Run::getRunnerAsString)
                 .withColumn("Osiągnięty czas", Run::getRunTimeAsString)
                 .printTable();

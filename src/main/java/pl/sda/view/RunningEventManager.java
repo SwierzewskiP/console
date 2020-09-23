@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class RunningEventManager {
 
     RunningEventDAO runningEventDAO = new RunningEventDAO();
+    Scanner scanner = new Scanner(System.in);
 
     public void printList() {
         new TablePrinter<RunningEvent>()
@@ -21,16 +22,25 @@ public class RunningEventManager {
     }
 
     public void addRunningEvent() {
-        Scanner s = new Scanner(System.in);
         System.out.println("Podaj nazwę wydarzenia biegowego:");
-        String name = s.nextLine();
+        String name = scanner.nextLine();
         System.out.println("Podaj miejsce wydarzenia:");
-        String place = s.nextLine();
+        String place = scanner.nextLine();
         System.out.println("Wpisz liczbę kilometrów do przebiegnięcia:");
-        String distance = s.nextLine();
+        String distance = scanner.nextLine();
 
         RunningEvent runningEvent = new RunningEvent(name, place, (Float.valueOf(distance)));
 
         runningEventDAO.create(runningEvent);
     }
+
+    public void deleteRunningEvent() {
+        System.out.println("Podaj Id wydarzenia, które chcesz usunąć");
+        Long eventId = scanner.nextLong();
+
+        runningEventDAO.deleteEvent(eventId);
+
+        System.out.println("Wydarzenie o id " + eventId + " zostało usunięte.");
+    }
+
 }

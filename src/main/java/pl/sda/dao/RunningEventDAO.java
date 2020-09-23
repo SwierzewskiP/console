@@ -35,5 +35,12 @@ public class RunningEventDAO {
 
         return runningEvent;
     }
+
+    public void deleteEvent(Long eventId) {
+        entityManager.getTransaction().begin();
+        RunningEvent runningEvent = entityManager.find(RunningEvent.class, eventId);
+        entityManager.remove(runningEvent);
+        entityManager.getTransaction().commit();
+    }
 }
 

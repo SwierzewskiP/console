@@ -8,7 +8,7 @@ import java.time.LocalTime;
 public class Run implements Serializable {
 
     @Transient
-    private int placeOnScoreboard = 0;
+    private static int placeOnScoreboard = 0;
     @Id
     @ManyToOne
     @JoinColumn(name = "runner_id")
@@ -32,6 +32,14 @@ public class Run implements Serializable {
         this.runner = runner;
         this.runningEvent = runningEvent;
         this.runTime = runTime;
+    }
+
+    public String getPlaceOnScoreboardAsString() {
+        return placeOnScoreboard + "";
+    }
+
+    public void setPlaceOnScoreboard(int placeOnScoreboard) {
+        this.placeOnScoreboard = placeOnScoreboard;
     }
 
     public Runner getRunner() {
@@ -70,11 +78,11 @@ public class Run implements Serializable {
         return runTime != null ? runTime.toString() : "";
     }
 
-    public String incrementPlace() {
-        int nextPlaceOnScoreboard = placeOnScoreboard;
-        nextPlaceOnScoreboard++;
-        return nextPlaceOnScoreboard + "";
-    }
+//    public String incrementPlace() {
+//        int nextPlaceOnScoreboard = placeOnScoreboard;
+//        nextPlaceOnScoreboard++;
+//        return nextPlaceOnScoreboard + "";
+//    }
 
     @Override
     public String toString() {

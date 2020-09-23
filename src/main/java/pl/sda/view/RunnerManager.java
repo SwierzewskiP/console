@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class RunnerManager {
 
     RunnerDAO runnerDAO = new RunnerDAO();
-    Scanner s = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public void printList() {
         new TablePrinter<Runner>()
@@ -26,14 +26,14 @@ public class RunnerManager {
 
     public void addRunner() {
             System.out.println("Podaj imię:");
-            String firstName = s.nextLine();
+            String firstName = scanner.nextLine();
             System.out.println("Podaj nazwisko:");
-            String lastName = s.nextLine();
+            String lastName = scanner.nextLine();
             boolean isFormatCorrect = false;
             LocalTime bestTime = null;
             while(!isFormatCorrect) {
                 System.out.println("Podaj najlepszy czas na 10 km (poprawny format HH:MM:SS):");
-                String bestTimeString = s.nextLine();
+                String bestTimeString = scanner.nextLine();
                 try {
                     bestTime = LocalTime.parse(bestTimeString);
                     isFormatCorrect=true;

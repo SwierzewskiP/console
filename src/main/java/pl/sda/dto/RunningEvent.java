@@ -1,5 +1,7 @@
 package pl.sda.dto;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 @Entity
@@ -13,7 +15,7 @@ public class RunningEvent {
     private String place;
     @Column(name = "distance_in_kms")
     private Float distanceInKms;
-    @OneToMany(mappedBy = "runningEvent")
+    @OneToMany(mappedBy = "runningEvent", cascade = {CascadeType.REMOVE})
     private List<Run> listOfRuns;
 
     public RunningEvent() {

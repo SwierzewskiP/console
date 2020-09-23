@@ -33,6 +33,7 @@ public class ConsoleManager {
         System.out.println("8 - Wyświetl wyniki danego biegu");
         System.out.println();
         System.out.println("9 - Dodaj nowe wydarzenie biegowe");
+        System.out.println("0 - Usuń wydarzenie biegowe");
         System.out.println();
         System.out.println("q - wyjście");
 
@@ -82,11 +83,14 @@ public class ConsoleManager {
                 break;
             case '9':
                 runningEventManager.addRunningEvent();
+                break;
+            case '0':
+                runningEventManager.deleteRunningEvent();
         }
     }
 
     public void pressEnterKeyToContinue() {
-        System.out.println("Press Enter key to continue...");
+        System.out.println("Naciśnij Enter, by kontynuować...");
         readChar();
     }
 

@@ -17,7 +17,7 @@ public class Runner {
     private String lastName;
     @Column(name = "ten_km_best_time")
     private LocalTime tenKmBestTime;
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "runner")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "runner")
     private List<Run> listOfRuns;
 
     public Runner() {
