@@ -1,6 +1,7 @@
 package pl.sda.dao;
 
 import pl.sda.dto.Runner;
+import pl.sda.dto.RunningEvent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -39,6 +40,13 @@ public class RunnerDAO {
         entityManager.getTransaction().begin();
         Runner runner = entityManager.find(Runner.class, runnerId);
         runner.setTenKmBestTime(newBestTime);
+        entityManager.getTransaction().commit();
+    }
+
+    public void deleteRunner(Long runnerId) {
+        entityManager.getTransaction().begin();
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        entityManager.remove(runner);
         entityManager.getTransaction().commit();
     }
 }

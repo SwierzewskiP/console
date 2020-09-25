@@ -33,7 +33,9 @@ public class ConsoleManager {
         System.out.println("8 - Wyświetl wyniki danego biegu");
         System.out.println();
         System.out.println("9 - Dodaj nowe wydarzenie biegowe");
-        System.out.println("0 - Usuń wydarzenie biegowe");
+        System.out.println();
+        System.out.println("a - Usuń biegacza");
+        System.out.println("b - Usuń wydarzenie biegowe");
         System.out.println();
         System.out.println("q - wyjście");
 
@@ -62,12 +64,15 @@ public class ConsoleManager {
                 break;
             case '3':
                 runnerManager.addRunner();
+                pressEnterKeyToContinue();
                 break;
             case '4':
                 runManager.addNewRun();
+                pressEnterKeyToContinue();
                 break;
             case '5':
                 runManager.updateRunTime();
+                pressEnterKeyToContinue();
                 break;
             case '6':
                 runManager.printAllRunsOfOneRunner();
@@ -83,9 +88,15 @@ public class ConsoleManager {
                 break;
             case '9':
                 runningEventManager.addRunningEvent();
+                pressEnterKeyToContinue();
                 break;
-            case '0':
+            case 'a':
+                runnerManager.deleteRunner();
+                pressEnterKeyToContinue();
+                break;
+            case 'b':
                 runningEventManager.deleteRunningEvent();
+                pressEnterKeyToContinue();
         }
     }
 

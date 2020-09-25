@@ -46,4 +46,12 @@ public class RunnerManager {
             runnerDAO.create(runner);
         }
 
+    public void deleteRunner() {
+        System.out.println("Podaj Id biegacza, którego chcesz usunąć");
+        Long runnerId = scanner.nextLong();
+
+        runnerDAO.deleteRunner(runnerId);
+
+        System.out.println("Biegacz o id " + runnerId + " został usunięty.");
     }
+}
